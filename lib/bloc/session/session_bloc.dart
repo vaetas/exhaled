@@ -11,14 +11,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SessionBloc extends Bloc<SessionEvent, SessionState> {
   final Technique technique;
 
-  SessionBloc(this.technique);
+  SessionBloc(this.technique)
+      : super(
+          SessionState.initial(Snapshot(technique)),
+        );
 
   final TickerService ticker = get<TickerService>();
 
   StreamSubscription<int> _streamSubscription;
-
-  @override
-  SessionState get initialState => SessionState.initial(Snapshot(technique));
 
   @override
   Stream<SessionState> mapEventToState(SessionEvent event) async* {
